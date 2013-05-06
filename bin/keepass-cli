@@ -5,6 +5,7 @@
 
 use strict;
 use warnings;
+# VERSION
 use App::KeePass;
 
 my $keepass = App::KeePass->new_with_options;
