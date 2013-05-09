@@ -10,3 +10,4 @@ cpanm Dist::Zilla
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
 dzil test
+git push --mirror git@github.com:celogeek/App-KeePass2.git
