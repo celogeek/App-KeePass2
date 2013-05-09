@@ -9,5 +9,5 @@ export PERL_CPANM_OPT="--mirror http://cpan.celogeek.com -v"
 cpanm Dist::Zilla
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
-dzil test
+dzil cover
 git push --mirror git@github.com:celogeek/App-KeePass2.git
