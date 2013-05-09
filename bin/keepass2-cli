@@ -1,13 +1,13 @@
 #!/usr/bin/env perl
 
-# PODNAME: keepass-cli
+# PODNAME: keepass2-cli
 # ABSTRACT: utility to manipulate keepass2 file
 
 use strict;
 use warnings;
 # VERSION
-use App::KeePass;
+use App::KeePass2;
 
-my $keepass = App::KeePass->new_with_options;
+my $keepass = App::KeePass2->new_with_options;
 $keepass->run;
 

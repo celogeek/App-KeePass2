@@ -1,4 +1,4 @@
-package App::KeePass;
+package App::KeePass2;
 
 # ABSTRACT: KeePass commandline tools
 
