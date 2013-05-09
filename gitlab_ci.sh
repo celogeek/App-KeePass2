@@ -13,7 +13,7 @@ cpanm Dist::Zilla
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
 dzil clean
-RELEASE_TESTING=1 dzil cover
+AUTHOR_TESTING=1 RELEASE_TESTING=1 dzil cover
 
 git checkout master
 git reset --hard origin/master
