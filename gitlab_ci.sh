@@ -3,14 +3,18 @@
 set -e
 
 source "$HOME/perl5/perlbrew/etc/bashrc"
-perlbrew use 5.16.3
-perlbrew install-cpanm
 export PERL_CPANM_OPT="--mirror http://cpan.celogeek.com -v"
+
+perlbrew use 5.16.3
+perlbrew install-cpanm -f
+
 cpanm Dist::Zilla
+
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
-dzil cover
 dzil clean
+RELEASE_TESTING=1 dzil cover
+
 git checkout master
 git reset --hard origin/master
 git checkout devel
