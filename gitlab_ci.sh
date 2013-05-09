@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x -e
 
 perlbrew use 5.16.3
 cpanm Dist::Zilla
