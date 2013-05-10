@@ -85,5 +85,6 @@ sub _dump {
 	my ($self) = @_;
 	$self->_fkp->load_db($self->file, $self->_get_master_key);
 	p($self->_fkp->groups);
+	return;
 }
 1;
