@@ -1,6 +1,6 @@
 package App::KeePass2;
 
-# ABSTRACT: KeePass commandline tools
+# ABSTRACT: KeePass2 commandline tools
 
 use strict;
 use warnings;
