@@ -5,7 +5,9 @@ package App::KeePass2;
 use strict;
 use warnings;
 # VERSION
+use utf8::all;
 use Moo;
+with 'App::KeePass2::Icons';
 use MooX::Options;
 use File::KeePass;
 use IO::Prompt;
@@ -68,9 +70,9 @@ sub _get_confirm_key {
 sub _create {
 	my ($self) = @_;
 	$self->_fkp->clear;
-	my $root = $self->_fkp->add_group({title => 'My Passwords', icon => 52});
+	my $root = $self->_fkp->add_group({title => 'My Passwords', icon => $self->get_icon_id('key')});
 	my $gid = $root->{'id'};
-	$self->_fkp->add_group({title => 'Internet', group => $gid, icon => 1});
+	$self->_fkp->add_group({title => 'Internet', group => $gid, icon => $self->get_icon_id('internet')});
 	$self->_fkp->add_group({title => 'Private', group => $gid, icon => 58});
 	$self->_fkp->add_group({title => 'Bank', group => $gid, icon => 66});
 	$self->_fkp->unlock if $self->_fkp->is_locked;
