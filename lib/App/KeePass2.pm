@@ -26,12 +26,11 @@ option 'create' => (
 );
 
 has _fkp => (
-	is => 'lazy',
+	is => 'ro',
+	default => sub {
+		File::KeePass->new;
+	}
 );
-
-sub _build__fkp {
-	return File::KeePass->new;
-}
 
 =method run
 
