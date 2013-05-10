@@ -60,6 +60,7 @@ sub _create {
 	my $confirm = $self->_get_confirm_key;
 	croak "Your master password is different from the confirm password !" if $master ne $confirm;
 	$self->_fkp->save_db($self->file, $master);
+	return;
 }
 
 sub _get_master_key {
