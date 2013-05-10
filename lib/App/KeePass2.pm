@@ -70,9 +70,9 @@ sub _get_confirm_key {
 sub _create {
 	my ($self) = @_;
 	$self->_fkp->clear;
-	my $root = $self->_fkp->add_group({title => 'My Passwords', icon => $self->get_icon_id('key')});
+	my $root = $self->_fkp->add_group({title => 'My Passwords', icon => $self->get_icon_id_from_key('key')});
 	my $gid = $root->{'id'};
-	$self->_fkp->add_group({title => 'Internet', group => $gid, icon => $self->get_icon_id('internet')});
+	$self->_fkp->add_group({title => 'Internet', group => $gid, icon => $self->get_icon_id_from_key('internet')});
 	$self->_fkp->add_group({title => 'Private', group => $gid, icon => 58});
 	$self->_fkp->add_group({title => 'Bank', group => $gid, icon => 66});
 	$self->_fkp->unlock if $self->_fkp->is_locked;
