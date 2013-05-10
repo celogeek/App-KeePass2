@@ -15,14 +15,28 @@ has '_icon_id_to_key' => (
 
 sub _build__icons {
 	return {
-		key => {
-			id => 0,
-			utf8 => "🔑",
-		},
-		internet => {
-			id => 1,
-			utf8 => "🌍",
-		}
+		key 		=> { id =>  0, utf8 => "🔑" },
+		internet 	=> { id =>  1, utf8 => "🌍" },
+		warning 	=> { id =>  2, utf8 => "🚧" },
+		network     => { id =>  3, utf8 => "💻" },
+		note        => { id =>  4, utf8 => "📝" },
+		talk        => { id =>  5, utf8 => "🙇" },
+		cube        => { id =>  6, utf8 => "" },
+		note2       => { id =>  7, utf8 => "" },
+		internet2   => { id =>  8, utf8 => "🌎" },
+		card        => { id =>  9, utf8 => "💳" },
+		note3       => { id => 10, utf8 => "📄" },
+		camera 		=> { id => 11, utf8 => "" },
+		wifi        => { id => 12, utf8 => "📡" },
+		key2        => { id => 13, utf8 => "🔐" },
+		wire 		=> { id => 14, utf8 => "🔌" },
+		scan 		=> { id => 15, utf8 => "📇" },
+		internet3   => { id => 16, utf8 => "🌏" },
+		disk  		=> { id => 17, utf8 => "💿" },
+		computer    => { id => 18, utf8 => "💻" },
+		email       => { id => 19, utf8 => "📨" },
+		setting     => { id => 20, utf8 => "" },
+		note4       => { id => 21, utf8 => "" },
 	}
 }
 
