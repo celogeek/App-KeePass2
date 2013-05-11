@@ -14,6 +14,7 @@ use File::KeePass;
 use IO::Prompt;
 use Carp;
 use Data::Printer;
+use feature 'say';
 
 =attr file
 
@@ -48,7 +49,7 @@ Dump the content of the groups
 =cut
 
 option 'dump_groups' => (
-    doc   => 'Dump the groups of a keepass2 file',
+    doc   => 'Dump the groups',
     is    => 'ro',
     short => 'd',
 );
@@ -58,6 +59,18 @@ has _fkp => (
     default => sub {
         File::KeePass->new;
     }
+);
+
+=attr list_groups
+
+List the groups with icon
+
+=cut
+
+option 'list_groups' => (
+    doc => 'List the groups',
+    is => 'ro',
+    short => 'l',
 );
 
 =method run
@@ -73,6 +86,7 @@ Start the cli app
 sub run {
     my ($self) = @_;
     $self->_create,      return if ( $self->create );
+    $self->_list_groups, return if ( $self->list_groups);
     $self->_dump_groups, return if ( $self->dump_groups );
     return;
 }
@@ -129,5 +143,21 @@ sub _dump_groups {
     $self->_fkp->load_db( $self->file, $self->_get_master_key );
     p( $self->_fkp->groups );
     return;
+}
+
+sub _list_groups {
+    my ($self) = @_;
+    $self->_fkp->load_db( $self->file, $self->_get_master_key );
+    $self->_display_groups($self->_fkp->groups, 0);
+}
+
+sub _display_groups {
+    my ($self, $groups, $level) = @_;
+    for my $group(@$groups) {
+        my $key = $self->get_icon_key_from_id($group->{icon});
+        my $icon = $self->get_icon_char_from_key($key);
+        say sprintf("%s%-3s%s", "    "x$level, $icon, $group->{title});
+        $self->_display_groups($group->{groups}, $level + 1);
+    }
 }
 1;
