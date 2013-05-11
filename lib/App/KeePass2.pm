@@ -14,6 +14,11 @@ use IO::Prompt;
 use Carp;
 use Data::Printer;
 
+=attr file
+
+The password file
+
+=cut
 option 'file' => (
 	doc => 'Your keepass2 file',
 	is => 'ro',
@@ -22,14 +27,24 @@ option 'file' => (
 	format => 's',
 );
 
+=attr create
+
+Create the keepass2 file
+
+=cut
 option 'create' => (
 	doc => 'Create a keepass2 file',
 	is => 'ro',
 	short => 'c',
 );
 
-option 'dump' => (
-	doc => 'Dump a keepass2 file',
+=attr dump_groups
+
+Dump the content of the groups
+
+=cut
+option 'dump_groups' => (
+	doc => 'Dump the groups of a keepass2 file',
 	is => 'ro',
 	short => 'd',
 );
@@ -53,7 +68,7 @@ Start the cli app
 sub run {
 	my ($self) = @_;
 	$self->_create, return if ($self->create);
-	$self->_dump, return if ($self->dump);
+	$self->_dump_groups, return if ($self->dump_groups);
 	return;
 }
 
@@ -69,12 +84,13 @@ sub _get_confirm_key {
 
 sub _create {
 	my ($self) = @_;
+	croak "The file already exists !" if -f $self->file;
 	$self->_fkp->clear;
 	my $root = $self->_fkp->add_group({title => 'My Passwords', icon => $self->get_icon_id_from_key('key')});
 	my $gid = $root->{'id'};
 	$self->_fkp->add_group({title => 'Internet', group => $gid, icon => $self->get_icon_id_from_key('internet')});
-	$self->_fkp->add_group({title => 'Private', group => $gid, icon => 58});
-	$self->_fkp->add_group({title => 'Bank', group => $gid, icon => 66});
+	$self->_fkp->add_group({title => 'Private', group => $gid, icon => $self->get_icon_id_from_key('key5')});
+	$self->_fkp->add_group({title => 'Bank', group => $gid, icon => $self->get_icon_id_from_key('dollar')});
 	$self->_fkp->unlock if $self->_fkp->is_locked;
 	my $master = $self->_get_master_key;
 	my $confirm = $self->_get_confirm_key;
@@ -83,7 +99,7 @@ sub _create {
 	return;
 }
 
-sub _dump {
+sub _dump_groups {
 	my ($self) = @_;
 	$self->_fkp->load_db($self->file, $self->_get_master_key);
 	p($self->_fkp->groups);
